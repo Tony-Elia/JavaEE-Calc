@@ -19,7 +19,7 @@ import EJBs.Calculator;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
-public class calcService {
+public class Service {
 
     @PersistenceContext(unitName = "hello")
     private EntityManager entityManager;
@@ -32,29 +32,21 @@ public class calcService {
 
     @POST
     @Path("calc")
-    public Response createCalculation(Calculator request) {
-        try {
-            int number1 = request.getOperand1();
-            int number2 = request.getOperand2();
-            String operation = request.getOperation();
-            int result = performOperation(number1, number2, operation);
+    public int createCalculation(Calculator request) {
+        int number1 = request.getOperand1();
+        int number2 = request.getOperand2();
+        String operation = request.getOperation();
+        int result = performOperation(number1, number2, operation);
 
-            Calculator calculation = new Calculator(number1, number2, operation, result);
-            entityManager.persist(calculation);
+        Calculator calculation = new Calculator(number1, number2, operation, result);
+        entityManager.persist(calculation);
 
-            return Response.ok(new CalculationResult(result)).build();
-        } catch (ArithmeticException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Division by zero is not allowed.").build();
-        } catch (IllegalArgumentException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid operation type.").build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error occurred during calculation.").build();
-        }
+        return result;
     }
 
     @GET
     @Path("calculations")
-    public Response getCalculations() {
+    public int getCalculations() {
         try {
             List<Calculator> calculations = entityManager.createQuery("SELECT c FROM Calculator c", Calculator.class).getResultList();
             return Response.ok(calculations).build();

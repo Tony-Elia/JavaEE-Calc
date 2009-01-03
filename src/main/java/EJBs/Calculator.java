@@ -12,16 +12,17 @@ public class Calculator {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int op1;
-    public int op2;
+    public int id;
+    public int number1;
+    public int number2;
     public String operation;
     public int res;
 
     public Calculator() {}
 
     public Calculator(int operand1, int operand2, String operation, int result) {
-        this.op1 = operand1;
-        this.op2 = operand2;
+        this.number1 = operand1;
+        this.number2 = operand2;
         this.operation = operation;
         this.res = result;
     }
@@ -29,11 +30,11 @@ public class Calculator {
    
 
     public int getOperand1() {
-        return op1;
+        return number1;
     }
 
     public int getOperand2() {
-        return op2;
+        return number2;
     }
 
     public String getOperation() {
@@ -45,11 +46,11 @@ public class Calculator {
     }
 
     public void setOperand1(int operand1) {
-        this.op1 = operand1;
+        this.number1 = operand1;
     }
 
     public void setOperand2(int operand2) {
-        this.op2 = operand2;
+        this.number2 = operand2;
     }
 
     public void setOperation(String operation) {
