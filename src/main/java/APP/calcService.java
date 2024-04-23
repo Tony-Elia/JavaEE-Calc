@@ -11,12 +11,11 @@ import javax.ws.rs.core.Response;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import EJBs.Calculator;
-import APP.CalculationResult;
 
 
 
 @Stateless
-@Path("/calcproject")
+@Path("/calc")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 

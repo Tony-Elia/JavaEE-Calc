@@ -1,5 +1,4 @@
 package APP;
-import EJBs.Calculator;
 public class CalculationResult {
 	public int result;
 
